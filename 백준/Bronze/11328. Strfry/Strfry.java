@@ -1,36 +1,31 @@
-//package boj11328_Strfry;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        StringBuilder sb= new StringBuilder();
+        while (T-- > 0) {
+            String line1 = sc.next();
+            String line2 = sc.next();
 
-		for (int i = 0; i < N; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			String str1 = st.nextToken();
-			String str2 = st.nextToken();
+//            System.out.println("=========" + line1 + "=======" + line2);
 
-			if (str1.length() != str2.length()) {
-				System.out.println("Impossible");
-				continue;
-			}
-			char[] arr1 = str1.toCharArray();
-			char[] arr2 = str2.toCharArray();
-			Arrays.sort(arr1);
-			Arrays.sort(arr2);
-			
-			
-			if(Arrays.equals(arr1, arr2)) {
-				System.out.println("Possible");
-			}else {
-				System.out.println("Impossible");
-			}
-		}
-	}
+            if(line1.length() != line2.length()) {
+                sb.append("Impossible").append("\n");
+                continue;
+            }
+
+            char[] c1 = line1.toCharArray();
+            char[] c2 = line2.toCharArray();
+            Arrays.sort(c1);
+            Arrays.sort(c2);
+
+            if(Arrays.equals(c1,c2)){
+                sb.append("Possible").append("\n");
+            }else sb.append("Impossible").append("\n");
+        }
+        System.out.println(sb);
+    }
 }
