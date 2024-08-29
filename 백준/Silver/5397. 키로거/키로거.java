@@ -11,7 +11,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         int T = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
 
@@ -60,33 +59,25 @@ public class Main {
     }
 
     static void insert(char ch) {
-        if (currIdx >= MAX_LENGTH)
-            return;
-
-
         data[currIdx] = ch;
         prev[currIdx] = cursor;
         next[currIdx] = next[cursor];
 
-        if (next[cursor] != -1)
+        if (next[cursor] != -1) {
             prev[next[cursor]] = currIdx;
-
+        }
         next[cursor] = currIdx;
         cursor = currIdx;
         currIdx++;
     }
 
     static void delete() {
-        if (cursor == 0 || cursor >= currIdx)
-            return;
-
-
-        if (next[cursor] != -1)
+        if (next[cursor] != -1) {
             prev[next[cursor]] = prev[cursor];
-
-        if (prev[cursor] != -1)
+        }
+        if (prev[cursor] != -1) {
             next[prev[cursor]] = next[cursor];
-
+        }
         cursor = prev[cursor];
     }
 }
