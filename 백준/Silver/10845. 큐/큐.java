@@ -1,57 +1,48 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		Queue<Integer> queue = new LinkedList<>();
-		int N = Integer.parseInt(br.readLine());
-		for(int i = 0; i < N; i++) {
-			StringTokenizer st= new StringTokenizer(br.readLine());
-			StringBuilder sb = new StringBuilder();
-			String temp = st.nextToken();
-			switch(temp) {
-			case "push" :
-				queue.offer(Integer.parseInt(st.nextToken()));
-				break;
-			case "pop" :
-				if(queue.isEmpty()) {
-					sb.append(-1).append("\n");
-				}else {
-				sb.append(queue.poll()).append("\n");
-				}
-				break;
-			case "size" :
-				sb.append(queue.size()).append("\n");
-				break;
-			case "empty" :
-				if(queue.isEmpty()) {
-					sb.append(1).append("\n");
-				}else {
-					sb.append(0).append("\n");
-				}
-				break;
-			case "front" :
-				if(queue.isEmpty()) {
-					sb.append(-1).append("\n");
-				}else {
-				sb.append(queue.peek()).append("\n");
-				}
-				break;
-			case "back" :
-				if(queue.isEmpty()) {	
-					sb.append(-1).append("\n");
-				}else {
-				sb.append(((LinkedList<Integer>) queue).peekLast()).append("\n");
-				}
-				break;
-				
-				
-			}System.out.print(sb);
-			}
-	}
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int N = Integer.parseInt(br.readLine());
+        LinkedList<Integer> q = new LinkedList<>();
+
+        StringBuilder res = new StringBuilder();
+        while(N-->0){
+            st = new StringTokenizer(br.readLine());
+            String s = st.nextToken();
+            switch(s){
+                case "push" :
+                    q.offer(Integer.parseInt(st.nextToken()));
+                    break;
+                case "pop" :
+                    if(!q.isEmpty())
+                      res.append(q.poll()).append("\n");
+                    else res.append(-1).append("\n");
+                    break;
+                case "front" :
+                    if(!q.isEmpty())
+                        res.append(q.peek()).append("\n");
+                    else res.append(-1).append("\n");
+                    break;
+                case "back" :
+                    if(!q.isEmpty())
+                        res.append(q.peekLast()).append("\n");
+                    else res.append(-1).append("\n");
+                    break;
+                case "size" :
+                    res.append(q.size()).append("\n");
+                    break;
+                case "empty" :
+                    boolean check = q.isEmpty();
+                    int num = 0;
+                    if(check) num = 1;
+                    res.append(num).append("\n");
+                    break;
+            }
+        }
+        System.out.println(res);
+    }
 }
