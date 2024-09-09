@@ -1,61 +1,41 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder(); // 출력저장
-
-        Queue<Integer> queue = new LinkedList<>();
+        LinkedList<Integer> q = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
         int N = Integer.parseInt(br.readLine());
-        for (int i = 0; i < N; i++) {
-            String str = br.readLine();
-            StringTokenizer st = new StringTokenizer(str);
-            String temp = st.nextToken();
-            switch (temp) {
+        for(int i = 0; i < N; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String command = st.nextToken();
+
+            switch(command){
                 case "push":
-                    queue.offer(Integer.parseInt(st.nextToken()));
+                    q.offer(Integer.parseInt(st.nextToken()));
                     break;
                 case "pop":
-                    if (queue.isEmpty()) {
-                        sb.append(-1).append('\n');
-                    } else {
-                        sb.append(queue.peek()).append('\n');
-                        queue.poll();
-                    }
+                    if(q.isEmpty()) sb.append(-1).append("\n");
+                    else sb.append(q.pop()).append("\n");
                     break;
                 case "size":
-                    sb.append(queue.size()).append('\n');
+                    sb.append(q.size()).append("\n");
                     break;
-
                 case "empty":
-                    if (queue.isEmpty()) {
-                        sb.append(1).append('\n');
-                    } else {
-                        sb.append(0).append('\n');
-                    }
+                    if(q.isEmpty()) sb.append(1).append("\n");
+                    else sb.append(0).append("\n");
                     break;
                 case "front":
-                    if (queue.isEmpty()) {
-                        sb.append(-1).append('\n');
-                    } else {
-                        sb.append(queue.peek()).append('\n');
-                    }
+                    if(q.isEmpty()) sb.append(-1).append("\n");
+                    else sb.append(q.peekFirst()).append("\n");
                     break;
-
                 case "back":
-                    if (queue.isEmpty()) {
-                        sb.append(-1).append('\n');
-                    } else {
-                        sb.append(((LinkedList<Integer>) queue).peekLast()).append('\n');
-                    }
+                    if(q.isEmpty()) sb.append(-1).append("\n");
+                    else sb.append(q.peekLast()).append("\n");
                     break;
             }
         }
-        System.out.print(sb); // 한 번에 출력
+        System.out.println(sb);
     }
 }
