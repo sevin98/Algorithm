@@ -1,39 +1,38 @@
-//package boj9012_괄호;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Stack;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static boolean isTrue(String str) {
-		Stack<Character> stack = new Stack<>();
-		
-		for(int i = 0 ; i < str.length(); i++) {
-			char ch = str.charAt(i);
-			if( ch == '(') {
-				stack.push(ch);
-			}else if(ch == ')'){
-				if(stack.isEmpty()) {
-					return false;
-				}
-				stack.pop();
-			}
-		}
-		return stack.isEmpty();
-	}
-    public static void main(String[] args) throws IOException {
-        Stack<Character> stack = new Stack<>();
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        for (int tc = 0; tc < N; tc++) {
+            boolean isValid = true;
+            Stack<Character> stack = new Stack<>();
 
-        int T = Integer.parseInt(br.readLine()); // tc입력
-        for (int tc = 0; tc < T; tc++) {// tc start
-            String str = br.readLine();
-           if(isTrue(str)) {
-        	   System.out.println("YES");
-           }else {
-        	   System.out.println("NO");
-           }
-        } // tc close
+            String input = br.readLine();
+            if (input.length() % 2 != 0) {
+                sb.append("NO\n");
+                continue;
+            }
+            for (int i = 0; i < input.length(); i++) {
+                char c = input.charAt(i);
+                if (c == '('){
+                    stack.push(c);
+                }
+                else if (c == ')'){
+                    if (stack.isEmpty()) {
+                        isValid = false;
+                        break;
+                    }else{
+                        stack.pop();
+                    }
+                }
+            }
+            if(!stack.isEmpty()) isValid = false;
+            if(isValid) sb.append("YES\n");
+            else sb.append("NO\n");
+        }
+        System.out.println(sb);
     }
 }
